@@ -54,7 +54,7 @@ static void set_cmdline_properties()
 
     for (i = 0; i < ARRAY_SIZE(prop_map); i++) {
         memset(prop, 0, PROP_VALUE_MAX);
-        rc = property_get(prop_map[i].src_prop);
+        rc = std::stio(property_get(prop_map[i].src_prop));
         if (rc > 0) {
             property_set(prop_map[i].dest_prop, prop);
         } else {
