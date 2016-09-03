@@ -54,7 +54,7 @@ static void set_cmdline_properties()
 
     for (i = 0; i < ARRAY_SIZE(prop_map); i++) {
         memset(prop, 0, PROP_VALUE_MAX);
-        rc = property_get(prop_map[i].src_prop, prop);
+        rc = property_get(prop_map[i].src_prop);
         if (rc > 0) {
             property_set(prop_map[i].dest_prop, prop);
         } else {
@@ -98,15 +98,15 @@ void vendor_load_properties()
     std::string devicename;
     int rc;
 
-    platform  = property_get("ro.board.platform", platform);
+    platform  = property_get("ro.board.platform");
     if (platform != ANDROID_TARGET)
         return;
 
     set_cmdline_properties();
 
-    radio = property_get("ro.boot.radio", radio);
-    carrier = property_get("ro.boot.carrier", carrier);
-    bootdevice = property_get("ro.boot.device", bootdevice);
+    radio = property_get("ro.boot.radio");
+    carrier = property_get("ro.boot.carrier");
+    bootdevice = property_get("ro.boot.device");
     if (radio == "0x1") {
         /* xt1058 */
         property_set("ro.product.device", "ghost_retail");
@@ -164,7 +164,7 @@ void vendor_load_properties()
         gsm_properties();
     }
 
-    property_get("ro.product.device", device);
+    property_get("ro.product.device");
     strlcpy(devicename, device, sizeof(devicename));
-    INFO("Found device: %s radio id: %s carrier: %s Setting build properties for %s device\n", bootdevice, radio, carrier, devicename);
+    INFO("Found device: %s radio id: %s carrier: %s Setting build properties for %s device\n", bootdevice.c_str(), radio.c_str(), carrier.c_str(), devicename.c_str()      );
 }
