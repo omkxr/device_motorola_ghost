@@ -51,11 +51,11 @@ static void set_cmdline_properties()
         { "ro.boot.hwrev", "ro.hw.hwrev", "0x8300", },
         { "ro.boot.radio", "ro.hw.radio", "0x1", },
     };
-
+    
     for (i = 0; i < ARRAY_SIZE(prop_map); i++) {
         memset(prop, 0, PROP_VALUE_MAX);
-        rc = std::stio(property_get(prop_map[i].src_prop));
-        if (rc > 0) {
+        std::string temp_var=property_get(prop_map[i].src_prop));
+        if (temp_var=="") {
             property_set(prop_map[i].dest_prop, prop);
         } else {
             property_set(prop_map[i].dest_prop, prop_map[i].def_val);
