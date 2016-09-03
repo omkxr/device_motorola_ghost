@@ -54,7 +54,7 @@ static void set_cmdline_properties()
     
     for (i = 0; i < ARRAY_SIZE(prop_map); i++) {
         memset(prop, 0, PROP_VALUE_MAX);
-        std::string temp_var=property_get(prop_map[i].src_prop));
+        std::string temp_var=property_get(prop_map[i].src_prop);
         if (temp_var=="") {
             property_set(prop_map[i].dest_prop, prop);
         } else {
@@ -164,7 +164,7 @@ void vendor_load_properties()
         gsm_properties();
     }
 
-    property_get("ro.product.device");
-    strlcpy(devicename, device, sizeof(devicename));
+    /*property_get("ro.product.device");
+    strlcpy(devicename, device, sizeof(devicename));*/
     INFO("Found device: %s radio id: %s carrier: %s Setting build properties for %s device\n", bootdevice.c_str(), radio.c_str(), carrier.c_str(), devicename.c_str()      );
 }
